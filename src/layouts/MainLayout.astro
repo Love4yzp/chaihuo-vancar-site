@@ -1,0 +1,264 @@
+---
+// src/layouts/MainLayout.astro
+// 主要布局组件 - 包含 SEO 设置、全局样式、导航栏
+// Main Layout Component - includes SEO, global styles, and navigation
+import { ViewTransitions } from "astro:transitions";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = "柴火流动空间 - 技术下乡公益巡游",
+    description = "柴火创客空间流动实验室，走遍全国，将创新教育和技术资源带到乡村",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- SEO Meta Tags -->
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+
+        <!-- 确保中文字体正确加载 - Ensure Chinese fonts load correctly -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <!-- View Transitions for smooth page navigation -->
+        <ViewTransitions />
+
+        <!-- Theme initialization script - MUST be first in head for zero-flicker -->
+        <script is:inline>
+            (function () {
+                // 1. Block all transitions immediately
+                document.documentElement.classList.add("no-transitions");
+
+                // 2. Determine and apply theme synchronously
+                const stored = localStorage.getItem("theme");
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                const theme =
+                    stored || (prefersDark ? "chaihuo-dark" : "chaihuo");
+                document.documentElement.setAttribute("data-theme", theme);
+
+                // 3. Re-enable transitions after first paint
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        document.documentElement.classList.remove(
+                            "no-transitions",
+                        );
+                    });
+                });
+            })();
+        </script>
+
+        <script>
+            // Track navigation direction for directional animations
+            document.addEventListener("astro:before-preparation", (e) => {
+                const currentPath = window.location.pathname;
+                const targetPath = new URL(e.to).pathname;
+
+                // Determine direction based on navigation hierarchy
+                // '/' is the base. Any other path is 'forward'. Going back to '/' is 'back'.
+                const isNavigatingBack =
+                    targetPath === "/" && currentPath !== "/";
+
+                if (isNavigatingBack) {
+                    document.documentElement.dataset.astroTransitionDirection =
+                        "back";
+                } else {
+                    document.documentElement.dataset.astroTransitionDirection =
+                        "forward";
+                }
+            });
+
+            // Clean up after transition
+            document.addEventListener("astro:after-swap", () => {
+                delete document.documentElement.dataset.astroTransitionDirection;
+            });
+        </script>
+    </head>
+    <body class="bg-base-100 min-h-screen flex flex-col">
+        <!-- 粘性导航栏 - Sticky Navigation Header -->
+        <header
+            class="navbar bg-base-100 shadow-md sticky top-0 z-50 px-4 lg:px-8"
+        >
+            <div class="navbar-start">
+                <a
+                    href="/"
+                    class="btn btn-ghost text-xl font-bold text-chaihuo flex items-center gap-2"
+                >
+                    <!-- Icon Placeholder -->
+                    <div
+                        class="w-8 h-8 rounded-lg bg-chaihuo/10 flex items-center justify-center"
+                    >
+                        <span class="text-lg">🔥</span>
+                    </div>
+                    柴火创客空间·基地车
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                <!-- 移动端菜单 - Mobile Menu -->
+                <div class="dropdown dropdown-end lg:hidden">
+                    <label tabindex="0" class="btn btn-ghost">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+                    <ul
+                        tabindex="0"
+                        class="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                        <li><a href="/#hero">基地车</a></li>
+                        <li><a href="/#intro">解决方案</a></li>
+                        <li><a href="/#route">巡游路线</a></li>
+                        <li><a href="/stories">现场故事</a></li>
+                        <li>
+                            <a href="/#contact" class="text-chaihuo font-bold"
+                                >共建计划</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.yuque.com/chaihuo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex items-center gap-2"
+                            >
+                                开源文档
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 opacity-50"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                    ></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 桌面端菜单 - Desktop Menu -->
+                <ul
+                    class="menu menu-horizontal px-1 hidden lg:flex items-center gap-1"
+                >
+                    <li>
+                        <a
+                            href="/#hero"
+                            class="hover:text-chaihuo transition-colors"
+                            >基地车</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/#route"
+                            class="hover:text-chaihuo transition-colors"
+                            >巡游路线</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/#intro"
+                            class="hover:text-chaihuo transition-colors"
+                            >解决方案</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/#contact"
+                            class="font-bold text-chaihuo hover:bg-chaihuo/10"
+                            >共建计划</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/stories"
+                            class="hover:text-chaihuo transition-colors"
+                            >现场故事</a
+                        >
+                    </li>
+                    <li>
+                        <div
+                            class="divider divider-horizontal mx-0 h-6 self-center"
+                        >
+                        </div>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.yuque.com/chaihuo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-1 text-base-content/70 hover:text-chaihuo"
+                        >
+                            开源文档
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-3 w-3"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                ></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Theme Toggle Button -->
+                <ThemeToggle />
+            </div>
+        </header>
+
+        <!-- 主要内容 - Main Content -->
+        <main class="flex-1" transition:animate="fade">
+            <slot />
+        </main>
+
+        <!-- 页脚 - Footer -->
+        <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+            <div>
+                <p class="font-bold text-lg">柴火创客空间·基地车</p>
+                <p>技术下乡 · 公益巡游 · 创新教育</p>
+                <p class="text-sm opacity-70">
+                    Copyright © 2026 - Chaihuo Makerspace
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

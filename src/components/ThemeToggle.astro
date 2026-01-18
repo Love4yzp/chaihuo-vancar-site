@@ -1,0 +1,164 @@
+---
+/**
+ * ThemeToggle.astro
+ *
+ * A high-quality, animated dark/light mode toggle.
+ * Uses a single SVG with mask transitions to morph between sun and moon.
+ *
+ * Logic:
+ * - Toggles 'data-theme' on document.documentElement between 'chaihuo' and 'chaihuo-dark'.
+ * - Persists preference to localStorage.
+ * - Supports Astro View Transitions.
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="theme-toggle theme-controller btn btn-ghost btn-circle relative overflow-hidden"
+  aria-label="Toggle theme"
+>
+  <div class="sun-moon-container relative h-6 w-6 text-current">
+    <svg
+      class="sun-moon"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      stroke-width="0"
+      fill="currentColor"
+    >
+      <mask id="moon-mask">
+        <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
+        <circle class="moon-bite" cx="12" cy="4" r="9" fill="black"></circle>
+      </mask>
+      <circle
+        class="main-circle"
+        cx="12"
+        cy="12"
+        r="5"
+        mask="url(#moon-mask)"
+      ></circle>
+      <g class="sun-rays">
+        <circle cx="12" cy="3" r="1.5"></circle>
+        <circle cx="21" cy="12" r="1.5"></circle>
+        <circle cx="12" cy="21" r="1.5"></circle>
+        <circle cx="3" cy="12" r="1.5"></circle>
+        <circle cx="18.36" cy="5.64" r="1.5"></circle>
+        <circle cx="18.36" cy="18.36" r="1.5"></circle>
+        <circle cx="5.64" cy="18.36" r="1.5"></circle>
+        <circle cx="5.64" cy="5.64" r="1.5"></circle>
+      </g>
+    </svg>
+  </div>
+</button>
+
+<style>
+  /* Animation Configuration */
+  .sun-moon {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .main-circle {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .moon-bite {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Default: Moon bite is far away (Sun state) */
+    cx: 26px;
+    cy: 4px; 
+  }
+
+  .sun-rays {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  /* 
+   * DARK MODE STATE
+   * Triggered when [data-theme='chaihuo-dark'] is present on html
+   */
+  :global([data-theme="chaihuo-dark"]) .sun-moon {
+    transform: rotate(-45deg);
+  }
+
+  :global([data-theme="chaihuo-dark"]) .main-circle {
+    r: 9; /* Grow to full moon size */
+  }
+
+  :global([data-theme="chaihuo-dark"]) .moon-bite {
+    cx: 17px; /* Move in to bite */
+    cy: 4px;
+  }
+
+  :global([data-theme="chaihuo-dark"]) .sun-rays {
+    transform: scale(0);
+    opacity: 0;
+  }
+</style>
+
+<script>
+  function setupThemeToggle() {
+    const toggleBtn = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+
+    const getTheme = () => html.getAttribute("data-theme") || "chaihuo";
+
+    const setTheme = (theme, animate = true) => {
+      if (!animate) {
+        html.classList.add("no-transitions");
+      }
+      html.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      if (!animate) {
+        // Re-enable transitions after paint
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            html.classList.remove("no-transitions");
+          });
+        });
+      }
+    };
+
+    toggleBtn?.addEventListener("click", () => {
+      const currentTheme = getTheme();
+      const newTheme = currentTheme === "chaihuo" ? "chaihuo-dark" : "chaihuo";
+      setTheme(newTheme, true); // Animate on user toggle
+    });
+
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = (e) => {
+      if (!localStorage.getItem("theme")) {
+        const newTheme = e.matches ? "chaihuo-dark" : "chaihuo";
+        setTheme(newTheme, true);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+  }
+
+  // Initial setup
+  setupThemeToggle();
+
+  // Handle Astro View Transitions - restore theme WITHOUT animation
+  document.addEventListener("astro:before-swap", (e) => {
+    // Preserve theme on the incoming document
+    const theme = document.documentElement.getAttribute("data-theme");
+    if (theme) {
+      e.newDocument.documentElement.setAttribute("data-theme", theme);
+      e.newDocument.documentElement.classList.add("no-transitions");
+    }
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    // Re-enable transitions after swap completes
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove("no-transitions");
+      });
+    });
+    setupThemeToggle();
+  });
+</script>

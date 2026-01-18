@@ -1,0 +1,120 @@
+---
+import MainLayout from "./MainLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<MainLayout
+    title={`${frontmatter.title} - 现场故事`}
+    description={frontmatter.description}
+>
+    <article class="min-h-screen pb-24">
+        {/* Hero Image */}
+        {
+            frontmatter.image && (
+                <div class="w-full h-[40vh] relative">
+                    <img
+                        src={frontmatter.image}
+                        alt={frontmatter.title}
+                        class="w-full h-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-80" />
+                </div>
+            )
+        }
+
+        <div
+            class="container mx-auto max-w-3xl px-6 {frontmatter.image ? '-mt-20' : 'pt-24'} relative"
+        >
+            {/* Breadcrumb */}
+            <div
+                class="text-sm breadcrumbs mb-6 text-base-content/60 bg-base-100/90 backdrop-blur rounded-lg inline-block px-4 py-2 shadow-sm"
+            >
+                <ul>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/stories">现场故事</a></li>
+                    <li>{frontmatter.title}</li>
+                </ul>
+            </div>
+
+            {/* Article Header */}
+            <header class="mb-12">
+                <div class="flex gap-2 mb-4 flex-wrap">
+                    {
+                        frontmatter.tags?.map((tag: string) => (
+                            <span class="badge badge-primary badge-sm">
+                                {tag}
+                            </span>
+                        ))
+                    }
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                    {frontmatter.title}
+                </h1>
+
+                <div
+                    class="flex items-center gap-6 text-sm text-base-content/60"
+                >
+                    {
+                        frontmatter.author && (
+                            <div class="flex items-center gap-2">
+                                <span>✍️</span>
+                                <span>{frontmatter.author}</span>
+                            </div>
+                        )
+                    }
+                    {
+                        frontmatter.date && (
+                            <div class="flex items-center gap-2">
+                                <span>📅</span>
+                                <span>
+                                    {new Date(
+                                        frontmatter.date,
+                                    ).toLocaleDateString("zh-CN")}
+                                </span>
+                            </div>
+                        )
+                    }
+                </div>
+            </header>
+
+            {/* Markdown Content - Rendered by Astro */}
+            <div
+                class="prose prose-lg max-w-none
+                prose-headings:font-bold prose-headings:text-base-content
+                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-base-content/80 prose-p:leading-relaxed
+                prose-a:text-chaihuo hover:prose-a:text-chaihuo/80
+                prose-strong:text-base-content prose-strong:font-bold
+                prose-blockquote:border-l-4 prose-blockquote:border-chaihuo prose-blockquote:bg-chaihuo/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic
+                prose-ul:list-disc prose-ol:list-decimal
+                prose-li:text-base-content/80
+                prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
+            >
+                <slot />
+            </div>
+
+            {/* Back Button */}
+            <div class="mt-16 pt-8 border-t border-base-200">
+                <a href="/stories" class="btn btn-ghost gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    返回故事列表
+                </a>
+            </div>
+        </div>
+    </article>
+</MainLayout>

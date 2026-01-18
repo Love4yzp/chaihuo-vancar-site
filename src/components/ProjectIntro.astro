@@ -1,0 +1,401 @@
+---
+// src/components/ProjectIntro.astro
+// 项目简介组件 - 强调功能方案和开源内容
+// Project Introduction Component - Emphasizing solutions and open source
+---
+
+<section id="intro" class="py-24 px-6">
+    <div class="container mx-auto max-w-6xl">
+        {/* 标题区 */}
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                完整的<span class="text-chaihuo">AIoT 创客空间方案</span>
+            </h2>
+            <p
+                class="text-xl md:text-2xl text-base-content/60 max-w-3xl mx-auto leading-relaxed"
+            >
+                从硬件设计到课程体系，从软件配置到建造指南 — 全栈开源
+            </p>
+        </div>
+
+        {/* 三大核心能力 */}
+        <div class="grid md:grid-cols-3 gap-8 mb-20">
+            {/* 能力1：空间智能 */}
+            <div
+                class="group bg-base-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-base-300"
+            >
+                <div class="p-8">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-chaihuo/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                    >
+                        <span class="text-3xl">✨</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3 text-base-content">
+                        空间智能
+                    </h3>
+                    <p class="text-chaihuo font-medium mb-6">
+                        设备间自动化的魔法时刻
+                    </p>
+
+                    <ul class="space-y-4 text-base-content/70">
+                        <li class="flex items-start gap-3">
+                            <span class="text-chaihuo mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >SO-ARM100 机械臂</strong
+                                > — 智能抓取与物料传递</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-chaihuo mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >设备联动</strong
+                                > — AI设计 → 激光切割 → 机械臂递送</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-chaihuo mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >场景编排</strong
+                                > — 可视化工作流，无代码配置</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* 能力2：AI 视觉与交互 */}
+            <div
+                class="group bg-base-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-base-300"
+            >
+                <div class="p-8">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-tech-blue/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                    >
+                        <span class="text-3xl">🧠</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3 text-base-content">
+                        AI 视觉与交互
+                    </h3>
+                    <p class="text-tech-blue font-medium mb-6">
+                        离线大模型，边缘智能
+                    </p>
+
+                    <ul class="space-y-4 text-base-content/70">
+                        <li class="flex items-start gap-3">
+                            <span class="text-tech-blue mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >Jetson Orin 服务器</strong
+                                > — 离线运行视觉大模型</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-tech-blue mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >SenseCAP Watcher</strong
+                                > — AI感知助手，手势识别</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-tech-blue mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >多模态交互</strong
+                                > — 语音、视觉、方言对话</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* 能力3：数字制造 */}
+            <div
+                class="group bg-base-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-base-300"
+            >
+                <div class="p-8">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-earth/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                    >
+                        <span class="text-3xl">🔧</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3 text-base-content">
+                        数字制造
+                    </h3>
+                    <p class="text-earth font-medium mb-6">
+                        现场制造，创意落地
+                    </p>
+
+                    <ul class="space-y-4 text-base-content/70">
+                        <li class="flex items-start gap-3">
+                            <span class="text-earth mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >3D 打印机</strong
+                                > — 快速原型与定制零件</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-earth mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >桌面激光切割</strong
+                                > — 1分钟定制城市徽章</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-earth mt-1">▸</span>
+                            <span
+                                ><strong class="text-base-content"
+                                    >电子焊接工作站</strong
+                                > — 完整的制造能力</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{/* 开源内容区域 */}
+<section id="opensource" class="py-24 px-6 bg-base-200">
+    <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                全栈<span class="text-chaihuo">开源</span>方案
+            </h2>
+            <p class="text-xl text-base-content/60 max-w-2xl mx-auto">
+                硬件设计 · 软件代码 · 课程文档 — 一切都是开放的
+            </p>
+        </div>
+
+        {/* 开源内容表格 */}
+        <div
+            class="bg-base-100 rounded-3xl shadow-lg overflow-hidden border border-base-300 mb-12"
+        >
+            <table class="w-full">
+                <thead class="bg-base-300">
+                    <tr>
+                        <th
+                            class="px-6 py-4 text-left font-bold text-base-content"
+                            >类别</th
+                        >
+                        <th
+                            class="px-6 py-4 text-left font-bold text-base-content"
+                            >内容</th
+                        >
+                        <th
+                            class="px-6 py-4 text-left font-bold text-base-content"
+                            >格式</th
+                        >
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-base-300">
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">📐 设计文件</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >3D模型、CAD图纸</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >STEP/DXF/STL</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">📋 BOM清单</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >完整材料清单+采购链接</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >Excel/CSV</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">📖 建造指南</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >分步骤图文教程</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >Markdown/PDF</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">🖨️ 3D打印文件</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >所有定制连接件</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >STL/3MF</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">⚡ 电气图纸</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >电力系统布线图</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >PDF</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">📚 课程资料</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >L1-L3标准课件</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >PPT/PDF</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">💻 软件配置</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >服务器、IoT系统配置</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >代码/文档</code
+                            ></td
+                        >
+                    </tr>
+                    <tr class="hover:bg-base-200/50 transition-colors">
+                        <td class="px-6 py-4 font-medium">🎬 建造视频</td>
+                        <td class="px-6 py-4 text-base-content/70"
+                            >全程记录纪录片</td
+                        >
+                        <td class="px-6 py-4"
+                            ><code class="bg-base-200 px-2 py-1 rounded text-sm"
+                                >YouTube/B站</code
+                            ></td
+                        >
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {/* 开源协议 */}
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-chaihuo/5 rounded-2xl p-6 border border-chaihuo/20">
+                <h4 class="font-bold text-lg mb-2 text-chaihuo">🔩 硬件设计</h4>
+                <p class="text-base-content/70 text-sm mb-2">CERN-OHL-S v2</p>
+                <p class="text-base-content/50 text-xs">开源硬件许可</p>
+            </div>
+            <div
+                class="bg-tech-blue/5 rounded-2xl p-6 border border-tech-blue/20"
+            >
+                <h4 class="font-bold text-lg mb-2 text-tech-blue">
+                    💻 软件代码
+                </h4>
+                <p class="text-base-content/70 text-sm mb-2">MIT License</p>
+                <p class="text-base-content/50 text-xs">自由使用、修改、分发</p>
+            </div>
+            <div class="bg-earth/5 rounded-2xl p-6 border border-earth/20">
+                <h4 class="font-bold text-lg mb-2 text-earth">📄 文档内容</h4>
+                <p class="text-base-content/70 text-sm mb-2">CC BY-SA 4.0</p>
+                <p class="text-base-content/50 text-xs">署名-相同方式共享</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{/* 培训课程区域 */}
+<section id="courses" class="py-24 px-6">
+    <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="text-tech-blue">标准化</span>培训课程
+            </h2>
+            <p class="text-xl text-base-content/60 max-w-2xl mx-auto">
+                从入门体验到深度开发，三级课程体系覆盖不同学习需求
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            {/* L1 入门体验 */}
+            <div
+                class="bg-base-100 rounded-3xl shadow-lg p-8 border-t-4 border-chaihuo border-x border-b border-base-300"
+            >
+                <div class="text-chaihuo font-bold text-sm mb-2">LEVEL 1</div>
+                <h3 class="text-2xl font-bold mb-4">入门体验</h3>
+                <p class="text-base-content/70 mb-6">2-4 小时工作坊</p>
+                <ul class="space-y-3 text-base-content/70">
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> AI 基础概念介绍
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 亲手制作定制徽章
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 体验 AI 视觉识别
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 空间智能演示
+                    </li>
+                </ul>
+            </div>
+
+            {/* L2 进阶实践 */}
+            <div
+                class="bg-base-100 rounded-3xl shadow-lg p-8 border-t-4 border-tech-blue border-x border-b border-base-300"
+            >
+                <div class="text-tech-blue font-bold text-sm mb-2">LEVEL 2</div>
+                <h3 class="text-2xl font-bold mb-4">进阶实践</h3>
+                <p class="text-base-content/70 mb-6">1-2 天深度课程</p>
+                <ul class="space-y-3 text-base-content/70">
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> AI 模型部署实战
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 机械臂编程控制
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> IoT 传感器项目
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 设备联动开发
+                    </li>
+                </ul>
+            </div>
+
+            {/* L3 深度共建 */}
+            <div
+                class="bg-base-100 rounded-3xl shadow-lg p-8 border-t-4 border-earth border-x border-b border-base-300"
+            >
+                <div class="text-earth font-bold text-sm mb-2">LEVEL 3</div>
+                <h3 class="text-2xl font-bold mb-4">深度共建</h3>
+                <p class="text-base-content/70 mb-6">长期合作项目</p>
+                <ul class="space-y-3 text-base-content/70">
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 具身智能研发
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 定制场景开发
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 开源贡献协作
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-green-500">✓</span> 社区共建运营
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,66 @@
+---
+// src/pages/index.astro
+// 主页 - 单页应用，包含所有内容区块
+// Home Page - Single page application with all content sections
+
+import MainLayout from "../layouts/MainLayout.astro";
+import Hero from "../components/Hero.jsx";
+import ProjectIntro from "../components/ProjectIntro.astro";
+import RouteMap from "../components/RouteMap.jsx";
+import Contact from "../components/Contact.astro";
+---
+
+<MainLayout
+	title="柴火基地车 MCV - 移动AI教学实验室"
+	description="Chaihuo Mobile Creator Vehicle - 一辆开源的、可快速部署的移动AI教学实验室，将AI体验、数字制造和创客教育带到全国每一个需要的地方"
+>
+	{/* Hero 首屏 - Hero Section */}
+	<Hero client:load />
+
+	{/* 巡游路线地图 - Route Map Section - MOVED UP */}
+	<section id="route" class="py-20 px-4 bg-base-200">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<h2 class="text-4xl md:text-5xl font-bold mb-6">
+					迈入旷野，我们的<span class="text-chaihuo">足迹</span>
+				</h2>
+				<p class="text-xl text-base-content/70">
+					从深圳出发，足迹遍布华南、华东、西南...
+				</p>
+			</div>
+
+			{/* Mapbox 地图组件 */}
+			<RouteMap client:load />
+
+			{/* Stories CTA - NEW */}
+			<div class="text-center mt-12">
+				<a
+					href="/stories"
+					class="btn btn-lg btn-primary gap-3 shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+						></path>
+					</svg>
+					阅读<span transition:name="stories-title">现场故事</span>，了解真实的影响力
+				</a>
+			</div>
+		</div>
+	</section>
+
+	{/* 项目介绍 - Project Introduction (核心能力 + 开源方案 + 课程) */}
+	<ProjectIntro />
+
+	{/* 联系我们 - Contact Section */}
+	<Contact />
+</MainLayout>

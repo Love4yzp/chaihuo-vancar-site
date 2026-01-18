@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+@theme {
+    /* 中文字体优先 - Chinese fonts first */
+    --font-family-sans: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+
+    /* 柴火品牌色 - Chaihuo brand colors (Mapped to theme variables) */
+    --color-chaihuo: var(--brand-chaihuo);
+    --color-earth: var(--brand-earth);
+    --color-tech-blue: var(--brand-tech-blue);
+
+    /* 强调色 - Emphasis colors */
+    --color-emphasis-gold: oklch(0.75 0.14 85);
+    --color-emphasis-coral: oklch(0.68 0.16 25);
+}
+
+/* 自定义 DaisyUI 主题 - Custom DaisyUI theme */
+@plugin "daisyui" {
+    themes: chaihuo --default, chaihuo-dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+    name: "chaihuo";
+    default: true;
+    prefersdark: false;
+    color-scheme: "light";
+
+    --color-primary: #e07a3a;
+    --color-primary-content: #ffffff;
+    --color-secondary: #5b8fb9;
+    --color-secondary-content: #ffffff;
+    --color-accent: #a67c52;
+    --color-accent-content: #ffffff;
+    --color-neutral: #3d4451;
+    --color-neutral-content: #ffffff;
+    --color-base-100: #f8f6f1;
+    --color-base-200: #f0ede6;
+    --color-base-300: #e5e1d8;
+    --color-base-content: #2d3436;
+    --color-info: #5b8fb9;
+    --color-success: #6ab04c;
+    --color-warning: #f0932b;
+    --color-error: #eb4d4b;
+    
+    --body-bg: #f8f6f1;
+
+    /* Brand tokens - Constant across themes */
+    --brand-chaihuo: oklch(0.70 0.15 40);
+    --brand-earth: oklch(0.65 0.08 80);
+    --brand-tech-blue: oklch(0.60 0.12 240);
+
+    /* DaisyUI Design System Variables - Light */
+    --radius-selector: 1rem;
+    --radius-field: 0.5rem;
+    --radius-box: 1.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+
+    /* Map colors - Light */
+    --map-bg-from: #f8fafc;
+    --map-bg-to: #f1f5f9;
+    --map-land-from: #e8ddd0;
+    --map-land-to: #d4c4b0;
+    --map-stroke: #c4b4a0;
+    --map-text: #888888;
+}
+
+@plugin "daisyui/theme" {
+    name: "chaihuo-dark";
+    default: false;
+    prefersdark: true;
+    color-scheme: "dark";
+
+    --color-primary: #e07a3a;
+    --color-primary-content: #ffffff;
+    --color-secondary: #5b8fb9;
+    --color-secondary-content: #ffffff;
+    --color-accent: #a67c52;
+    --color-accent-content: #ffffff;
+    --color-neutral: #1a1a1a;
+    --color-neutral-content: #ffffff;
+    --color-base-100: #111111;
+    --color-base-200: #1a1a1a;
+    --color-base-300: #2a2a2a;
+    --color-base-content: #e5e1d8;
+    --color-info: #5b8fb9;
+    --color-success: #6ab04c;
+    --color-warning: #f0932b;
+    --color-error: #eb4d4b;
+
+    --body-bg: #111111;
+
+    /* Brand tokens - Constant across themes */
+    --brand-chaihuo: oklch(0.70 0.15 40);
+    --brand-earth: oklch(0.65 0.08 80);
+    --brand-tech-blue: oklch(0.60 0.12 240);
+
+    /* DaisyUI Design System Variables - Dark */
+    --radius-selector: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-box: 1rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+
+    /* Map colors - Dark */
+    --map-bg-from: #1e293b;
+    --map-bg-to: #0f172a;
+    --map-land-from: #334155;
+    --map-land-to: #1e293b;
+    --map-stroke: #475569;
+    --map-text: #94a3b8;
+}
+
+/* 全局样式增强 - Global style enhancements */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === ANTI-FLICKER: Disable transitions during initialization === */
+html.no-transitions,
+html.no-transitions *,
+html.no-transitions *::before,
+html.no-transitions *::after {
+    transition: none !important;
+    animation-duration: 0s !important;
+}
+
+/* Only apply theme transitions when NOT blocked */
+html[data-theme]:not(.no-transitions) {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-theme]:not(.no-transitions) body,
+html[data-theme]:not(.no-transitions) section,
+html[data-theme]:not(.no-transitions) header,
+html[data-theme]:not(.no-transitions) .navbar,
+html[data-theme]:not(.no-transitions) .card,
+html[data-theme]:not(.no-transitions) .footer {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--body-bg, #f8f6f1);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+}
+
+/* 更大的标题间距 - Generous heading spacing */
+h1,
+h2,
+h3 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+/* 链接箭头动画 - Link arrow animation */
+.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.2s ease;
+}
+
+.link-arrow:hover {
+    gap: 0.5rem;
+}
+
+/* 多色标题样式 - Multi-color headline helper */
+.text-gradient-warm {
+    background: linear-gradient(135deg, var(--color-chaihuo), var(--color-emphasis-coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+   PREMIUM VIEW TRANSITIONS
+   ======================================== */
+
+/* Custom easing and variables for premium feel */
+:root {
+    --transition-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-duration: 400ms;
+}
+
+/* Slide-forward animations: Home → Subpage */
+@keyframes slide-out-to-left {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-60px); }
+}
+
+@keyframes slide-in-from-right {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide-back animations: Subpage → Home */
+@keyframes slide-out-to-right {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(60px); }
+}
+
+@keyframes slide-in-from-left {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Shared element transition: Page Title Morph */
+::view-transition-group(stories-title) {
+    animation-duration: var(--transition-duration);
+    animation-timing-function: var(--transition-ease-out-expo);
+}
+
+/* Directional root transitions */
+html[data-astro-transition-direction="forward"]::view-transition-old(root) {
+    animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-out-to-left;
+}
+html[data-astro-transition-direction="forward"]::view-transition-new(root) {
+    animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-in-from-right;
+}
+
+html[data-astro-transition-direction="back"]::view-transition-old(root) {
+    animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-out-to-right;
+}
+html[data-astro-transition-direction="back"]::view-transition-new(root) {
+    animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-in-from-left;
+}
+

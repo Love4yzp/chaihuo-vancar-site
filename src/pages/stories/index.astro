@@ -1,0 +1,144 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// Get all markdown files in this directory using the modern Vite import.meta.glob
+const storiesRaw = import.meta.glob("./*.md", { eager: true });
+const stories = Object.values(storiesRaw) as any[];
+
+// Filter out index.astro and sort by date
+const sortedStories = stories
+    .filter((story) => story.url !== "/stories/")
+    .sort((a, b) => {
+        const dateA = new Date(a.frontmatter.date || 0).valueOf();
+        const dateB = new Date(b.frontmatter.date || 0).valueOf();
+        return dateB - dateA;
+    });
+
+// Extract first 6 image URLs for preloading
+const preloadImages = sortedStories
+    .slice(0, 6)
+    .map((s) => s.frontmatter.image)
+    .filter(Boolean);
+---
+
+<MainLayout
+    title="现场故事 - 柴火基地车"
+    description="记录柴火基地车在全国的巡游足迹和真实故事"
+>
+    {/* Preload above-the-fold images */}
+    {
+        preloadImages.map((src) => (
+            <link rel="preload" as="image" href={src} slot="head" />
+        ))
+    }
+
+    <div class="bg-base-200 min-h-screen py-24 px-6">
+        <div class="container mx-auto max-w-6xl">
+            {/* Header */}
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                    <span transition:name="stories-title">现场故事</span>
+                </h1>
+                <p class="text-xl text-base-content/70 max-w-2xl mx-auto">
+                    每一次巡游，都是一次新的相遇。记录我们与创客、学生和社区共同创造的美好时刻。
+                </p>
+            </div>
+
+            {/* Stories Grid */}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {
+                    sortedStories.map((story, index) => (
+                        <a href={story.url} class="group block">
+                            <article class="bg-base-100 rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                                {/* Image */}
+                                <div class="h-48 overflow-hidden bg-gray-100 relative">
+                                    {story.frontmatter.image ? (
+                                        <img
+                                            src={story.frontmatter.image}
+                                            alt={story.frontmatter.title}
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            loading={
+                                                index < 3 ? "eager" : "lazy"
+                                            }
+                                            fetchpriority={
+                                                index < 3 ? "high" : "auto"
+                                            }
+                                        />
+                                    ) : (
+                                        <div class="w-full h-full flex items-center justify-center text-4xl bg-chaihuo/10">
+                                            📖
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div class="p-8 flex-1 flex flex-col">
+                                    <div class="flex gap-2 mb-4 flex-wrap">
+                                        {story.frontmatter.tags?.map(
+                                            (tag: string) => (
+                                                <span class="badge badge-primary badge-outline text-xs">
+                                                    {tag}
+                                                </span>
+                                            ),
+                                        )}
+                                    </div>
+
+                                    <h2 class="text-2xl font-bold mb-3 group-hover:text-chaihuo transition-colors">
+                                        {story.frontmatter.title}
+                                    </h2>
+
+                                    <p class="text-base-content/70 mb-4 line-clamp-3 text-sm flex-1">
+                                        {story.frontmatter.description}
+                                    </p>
+
+                                    <div class="flex items-center justify-between text-xs text-base-content/50 mt-4 pt-4 border-t border-base-200">
+                                        <span>{story.frontmatter.author}</span>
+                                        {story.frontmatter.date && (
+                                            <span>
+                                                {new Date(
+                                                    story.frontmatter.date,
+                                                ).toLocaleDateString("zh-CN")}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    ))
+                }
+            </div>
+
+            {/* Empty State */}
+            {
+                sortedStories.length === 0 && (
+                    <div class="text-center py-20 bg-base-100 rounded-3xl shadow-sm">
+                        <span class="text-6xl mb-4 block">📝</span>
+                        <h3 class="text-2xl font-bold mb-2">
+                            故事正在发生中...
+                        </h3>
+                        <p class="text-base-content/60">
+                            我们的基地车正在路上，敬请期待第一篇现场报道。
+                        </p>
+                    </div>
+                )
+            }
+
+            <div class="text-center mt-16">
+                <a href="/#contact" class="btn btn-outline gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M11 17l-5-5m0 0l5-5m-5 5h12"></path></svg
+                    >
+                    返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+</MainLayout>
