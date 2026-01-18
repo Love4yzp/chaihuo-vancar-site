@@ -124,17 +124,33 @@ backgroundImage: 'url(/你的图片名.jpg)',
 
 ### 4️⃣ 添加新的巡游地点
 
-打开 `src/pages/index.astro`，找到时间线部分，复制一个 `<li>` 块：
+我们的路线数据已经模块化管理。请打开 `src/components/map/route-config.js` 进行修改。
 
-```html
-<li>
-  <hr class="bg-chaihuo"/>
-  <div class="timeline-start">2024.03</div>  <!-- 修改日期 -->
-  <div class="timeline-middle">...</div>
-  <div class="timeline-end timeline-box">深圳启动</div>  <!-- 修改地点 -->
-  <hr class="bg-chaihuo"/>
-</li>
+#### 添加关键城市（带弹窗信息）
+
+在 `KEY_CITIES` 数组中添加新的城市对象：
+
+```javascript
+{
+    id: 'city-id',
+    name: '城市名',
+    x: 50.5, y: 64.1,  // 地图坐标 (0-100)
+    date: '2026.XX.XX',
+    description: '城市描述...'
+}
 ```
+
+#### 更新巡游路径
+
+在 `ROUTE_POINTS` 数组中添加坐标点。
+
+> **💡 开发者提示**：
+> 想要快速获取地图坐标？
+>
+> 1. 打开 `src/components/map/useDevTools.js`
+> 2. 将 `IS_DEV` 常量改为 `true`
+> 3. 在浏览器中访问页面，使用顶部的"开始手绘路径"工具
+> 4. 绘制完成后点击"复制 (JSON)"即可获得代码！
 
 ### 5️⃣ 添加新的影响力故事
 
@@ -211,9 +227,9 @@ A: 确保开发服务器正在运行（`npm run dev`），刷新浏览器页面�
 
 A: 查看终端窗口，Astro 会显示错误信息
 
-### Q: 部署到哪里？
+### Q: 除了 Cloudflare 还可以部署到哪里？
 
-A: 可以部署到 Vercel、Netlify、GitHub Pages 等平台。运行 `npm run build` 后，将 `dist/` 文件夹部署即可。
+A: 本项目可以部署到任何静态网站托管平台（如 Vercel, Netlify, GitHub Pages）或传统的 Nginx/Apache 服务器。只需上传 `npm run build` 生成的 `dist/` 文件夹即可。
 
 ## 👥 贡献指南
 
