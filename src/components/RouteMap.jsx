@@ -56,8 +56,8 @@ export default function RouteMap() {
     }, [displayCity?.id, displayCity?.x, displayCity?.y, selectedCity?.id, hoveredCity?.id]);
 
     // Determine which points to show for the route trail
-    const routePoints = (IS_DEV && devTools.isDrawingMode && devTools.drawingPoints.length > 0) 
-        ? devTools.drawingPoints 
+    const routePoints = (IS_DEV && devTools.isDrawingMode && devTools.drawingPoints.length > 0)
+        ? devTools.drawingPoints
         : ROUTE_POINTS;
 
     return (
@@ -119,7 +119,7 @@ export default function RouteMap() {
                             <stop offset="0%" stopColor="var(--map-land-from)" stopOpacity="0.6" />
                             <stop offset="100%" stopColor="var(--map-land-to)" stopOpacity="0.4" />
                         </linearGradient>
-                        
+
                         <linearGradient id="routeGradient" x1="100%" y1="100%" x2="0%" y2="0%">
                             <stop offset="0%" stopColor="#ff6b35" />
                             <stop offset="30%" stopColor="#ffaa00" />
@@ -173,8 +173,9 @@ export default function RouteMap() {
                         fill="var(--map-text)"
                         fontSize="2.5"
                         fontStyle="italic"
+                        style={{ fontFamily: 'var(--font-family-sans)' }}
                     >
-                        Maker Journey · Across China
+                        赛博旅途 · 马踏神州
                     </text>
 
                     {/* 6. Coordinate Picker (dev mode only) */}
@@ -182,7 +183,7 @@ export default function RouteMap() {
                 </svg>
 
                 {/* Floating Info Card - Desktop only */}
-                <div 
+                <div
                     className="absolute z-20 hidden md:block"
                     style={{
                         ...tooltipStyle,
@@ -248,7 +249,7 @@ export default function RouteMap() {
                     <span className="text-accent">2026.11.11</span>
                 </p>
                 <p className="text-base-content/60">
-                    From Shenzhen · Across China · Back to Shenzhen
+                    始于深圳 · 众人拾柴火焰高 · 辐射全国
                 </p>
             </div>
 
