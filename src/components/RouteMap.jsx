@@ -121,10 +121,10 @@ export default function RouteMap() {
                         </linearGradient>
 
                         <linearGradient id="routeGradient" x1="100%" y1="100%" x2="0%" y2="0%">
-                            <stop offset="0%" stopColor="#ff6b35" />
-                            <stop offset="30%" stopColor="#ffaa00" />
-                            <stop offset="60%" stopColor="#aadd00" />
-                            <stop offset="100%" stopColor="#88cc00" />
+                            <stop offset="0%" stopColor="#d84144" />
+                            <stop offset="40%" stopColor="#e86a4a" />
+                            <stop offset="70%" stopColor="#f3d230" />
+                            <stop offset="100%" stopColor="#f5da4f" />
                         </linearGradient>
 
                         <filter id="glow">
@@ -162,7 +162,7 @@ export default function RouteMap() {
 
                     {/* 4. Drawing Points (dev mode only) */}
                     {IS_DEV && devTools.isDrawingMode && devTools.drawingPoints.map((pt, i) => (
-                        <circle key={i} cx={pt.x} cy={pt.y} r="0.5" fill="#ff6b35" opacity="0.6" />
+                        <circle key={i} cx={pt.x} cy={pt.y} r="0.5" fill="#d84144" opacity="0.6" />
                     ))}
 
                     {/* 5. Decorative Text */}

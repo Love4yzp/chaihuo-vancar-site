@@ -16,16 +16,16 @@ const CityMarker = ({ city, onClick, onHover }) => {
                 {/* 脉冲光环 (仅当前城市，多层效果) */}
                 {isCurrent && (
                     <>
-                        <circle r="1.5" fill="#ff6b35" fillOpacity="0.2" className="animate-premium-pulse" />
-                        <circle r="1.5" fill="#ff6b35" fillOpacity="0.15" className="animate-premium-pulse pulse-delay-1" />
-                        <circle r="1.5" fill="#ff6b35" fillOpacity="0.1" className="animate-premium-pulse pulse-delay-2" />
+                        <circle r="1.5" fill="#d84144" fillOpacity="0.2" className="animate-premium-pulse" />
+                        <circle r="1.5" fill="#d84144" fillOpacity="0.15" className="animate-premium-pulse pulse-delay-1" />
+                        <circle r="1.5" fill="#d84144" fillOpacity="0.1" className="animate-premium-pulse pulse-delay-2" />
                     </>
                 )}
 
                 {/* 主标记点 */}
                 <circle
                     r={isCurrent ? 1.2 : 0.8}
-                    fill={isCurrent ? "#ff6b35" : "#ffaa00"}
+                    fill={isCurrent ? "#d84144" : "#f3d230"}
                     stroke="white"
                     strokeWidth="0.3"
                     filter="url(#glow)"
