@@ -4,6 +4,9 @@
     /* 中文字体优先 - Chinese fonts first */
     --font-family-sans: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
 
+    /* 科技风格字体 - Tech-style font for futuristic elements */
+    --font-family-tech: "WDXL Lubrifont SC", -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+
     /* 柴火品牌色 - Chaihuo brand colors (Mapped to theme variables) */
     /* 主色：红色 #d84144 | 辅助色：黄色 #f3d230 */
     --color-chaihuo: var(--brand-chaihuo);
@@ -142,11 +145,11 @@ html.no-transitions *::after {
 /* Only apply theme transitions when NOT blocked */
 html[data-theme]:not(.no-transitions) {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html[data-theme]:not(.no-transitions) body,
@@ -156,7 +159,7 @@ html[data-theme]:not(.no-transitions) .navbar,
 html[data-theme]:not(.no-transitions) .card,
 html[data-theme]:not(.no-transitions) .footer {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -193,6 +196,11 @@ h3 {
     background-clip: text;
 }
 
+/* 科技风格字体类 - Tech-style font class for futuristic UI elements */
+.font-tech {
+    font-family: var(--font-family-tech);
+}
+
 /* ========================================
    PREMIUM VIEW TRANSITIONS
    ======================================== */
@@ -205,24 +213,52 @@ h3 {
 
 /* Slide-forward animations: Home → Subpage */
 @keyframes slide-out-to-left {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(-60px); }
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
 }
 
 @keyframes slide-in-from-right {
-    from { opacity: 0; transform: translateX(60px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Slide-back animations: Subpage → Home */
 @keyframes slide-out-to-right {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(60px); }
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(60px);
+    }
 }
 
 @keyframes slide-in-from-left {
-    from { opacity: 0; transform: translateX(-60px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Shared element transition: Page Title Morph */
@@ -235,6 +271,7 @@ h3 {
 html[data-astro-transition-direction="forward"]::view-transition-old(root) {
     animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-out-to-left;
 }
+
 html[data-astro-transition-direction="forward"]::view-transition-new(root) {
     animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-in-from-right;
 }
@@ -242,7 +279,7 @@ html[data-astro-transition-direction="forward"]::view-transition-new(root) {
 html[data-astro-transition-direction="back"]::view-transition-old(root) {
     animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-out-to-right;
 }
+
 html[data-astro-transition-direction="back"]::view-transition-new(root) {
     animation: var(--transition-duration) var(--transition-ease-out-expo) both slide-in-from-left;
 }
-

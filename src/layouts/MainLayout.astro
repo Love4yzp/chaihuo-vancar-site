@@ -3,8 +3,11 @@
 // 主要布局组件 - 包含 SEO 设置、全局样式、导航栏
 // Main Layout Component - includes SEO, global styles, and navigation
 import { ViewTransitions } from "astro:transitions";
+import { Image } from "astro:assets";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import logo from "../assets/chaihuo-makers-logo.png";
 import "../styles/global.css";
+import "@fontsource/wdxl-lubrifont-sc/chinese-simplified.css";
 
 interface Props {
     title?: string;
@@ -23,7 +26,7 @@ const {
         <meta charset="UTF-8" />
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />
 
         <!-- SEO Meta Tags -->
@@ -102,13 +105,17 @@ const {
                     href="/"
                     class="btn btn-ghost text-xl font-bold text-chaihuo flex items-center gap-2"
                 >
-                    <!-- Icon Placeholder -->
-                    <div
-                        class="w-8 h-8 rounded-lg bg-chaihuo/10 flex items-center justify-center"
+                    <!-- Logo -->
+                    <Image
+                        src={logo}
+                        alt="柴火创客空间"
+                        class="w-20 h-20 md:w-23 md:h-23 object-contain shrink-0"
+                    />
+                    <h1
+                        class="font-tech text-xl w-auto object-contain shrink-0"
                     >
-                        <span class="text-lg">🔥</span>
-                    </div>
-                    柴火创客空间·基地车
+                        基地车
+                    </h1>
                 </a>
             </div>
 
