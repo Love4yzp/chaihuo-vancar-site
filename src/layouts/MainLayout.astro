@@ -18,6 +18,8 @@ const {
     title = "柴火流动空间 - 技术下乡公益巡游",
     description = "柴火创客空间流动实验室，走遍全国，将创新教育和技术资源带到乡村",
 } = Astro.props;
+
+const clarityId = Astro.locals?.runtime?.env?.CLARITY_ID;
 ---
 
 <!doctype html>
@@ -94,6 +96,29 @@ const {
                     .astroTransitionDirection;
             });
         </script>
+
+        {
+            clarityId && (
+                <script
+                    is:inline
+                    type="text/javascript"
+                    define:vars={{ clarityId }}
+                >
+                    (function (c, l, a, r, i, t, y) {
+                        c[a] =
+                            c[a] ||
+                            function () {
+                                (c[a].q = c[a].q || []).push(arguments);
+                            };
+                        t = l.createElement(r);
+                        t.async = 1;
+                        t.src = "https://www.clarity.ms/tag/" + i;
+                        y = l.getElementsByTagName(r)[0];
+                        y.parentNode.insertBefore(t, y);
+                    })(window, document, "clarity", "script", clarityId);
+                </script>
+            )
+        }
     </head>
     <body class="bg-base-100 min-h-screen flex flex-col font-sans">
         <!-- 粘性导航栏 - Sticky Navigation Header -->

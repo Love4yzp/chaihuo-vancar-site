@@ -1,15 +1,15 @@
 # 柴火流动空间 - 网站项目
 
-[![Astro](https://img.shields.io/badge/Astro-4.x-FF5D01?logo=astro)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?logo=astro)](https://astro.build)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react)](https://react.dev)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
-[![DaisyUI](https://img.shields.io/badge/DaisyUI-Latest-5A0EF8?logo=daisyui)](https://daisyui.com)
+[![DaisyUI](https://img.shields.io/badge/DaisyUI-5.x-5A0EF8?logo=daisyui)](https://daisyui.com)
 
 这是柴火流动空间的官方营销网站，用于展示我们的公益项目、全国巡游路线和技术下乡的影响力。
 
 ## 📂 项目结构
 
-```
+```text
 chaihuo-vancar-site/
 ├── src/
 │   ├── components/          # 可复用组件
@@ -212,10 +212,11 @@ backgroundImage: 'url(/你的图片名.jpg)',
 
 ## 🛠️ 技术栈
 
-- **Astro 4.x** - 现代化静态网站生成器
+- **Astro 5.x** - 现代化静态网站生成器
 - **React 19** - 交互式组件
 - **Tailwind CSS 4** - 实用优先的 CSS 框架
-- **DaisyUI** - Tailwind 组件库
+- **DaisyUI 5** - Tailwind 组件库
+- **Cloudflare Workers** - 边缘部署
 
 ## 📝 常见问题
 
@@ -230,6 +231,13 @@ A: 查看终端窗口，Astro 会显示错误信息
 ### Q: 除了 Cloudflare 还可以部署到哪里？
 
 A: 本项目可以部署到任何静态网站托管平台（如 Vercel, Netlify, GitHub Pages）或传统的 Nginx/Apache 服务器。只需上传 `npm run build` 生成的 `dist/` 文件夹即可。
+
+### Q: 如何配置 Microsoft Clarity 统计？
+
+A:
+
+- **生产环境 (Cloudflare)**：在 `wrangler.jsonc` 的 `vars` 中配置 `CLARITY_ID`。
+- **本地开发**：`CLARITY_ID` 默认为 `undefined`，Clarity 脚本不会被加载，以确保开发体验。
 
 ## 👥 贡献指南
 
@@ -248,4 +256,4 @@ A: 本项目可以部署到任何静态网站托管平台（如 Vercel, Netlify,
 
 ---
 
-**Made with ❤️ by Chaihuo Makerspace**
+Made with ❤️ by Chaihuo Makerspace

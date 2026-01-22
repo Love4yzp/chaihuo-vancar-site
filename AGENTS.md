@@ -14,28 +14,33 @@ This document provides essential context, commands, and guidelines for AI agents
 ## 🚀 Common Commands
 
 ### Development & Build
+
 - `npm run dev` - Start Astro development server (local:4321)
 - `npm run build` - Build the production site to `dist/`
 - `npm run preview` - Preview the production build locally
 - `npm run astro ...` - Run Astro CLI commands
 
 ### Testing & Linting
+
 - **Tests**: Currently, no automated testing framework (Jest/Vitest/Playwright) is configured. Manual verification is required.
 - **Linting**: No dedicated linting script (ESLint/Prettier) in `package.json`. Follow existing file patterns for formatting.
 
 ## 📐 Code Style & Conventions
 
 ### 1. File Naming & Structure
+
 - **Components**: `PascalCase` (e.g., `Hero.jsx`, `MainLayout.astro`)
 - **Utilities/Configs**: `kebab-case` or `camelCase` (e.g., `route-config.js`, `useDevTools.js`)
 - **Pages**: Follow Astro routing in `src/pages/`. Content-heavy pages should use Markdown (`.md`) or MDX if configured.
 
 ### 2. Component Architecture (Islands)
+
 - Keep components as static `.astro` files by default.
 - Use React components (`.jsx`) ONLY for interactive elements (maps, toggles, complex forms).
 - **Hydration**: Use `client:load` or `client:visible` directives in `.astro` files when importing React components.
 
 ### 3. Styling & Design System
+
 - **Colors**: Use the project's brand colors defined in `src/styles/global.css` via Tailwind classes:
   - `text-chaihuo` / `bg-chaihuo` (Brand Orange)
   - `text-tech-blue` / `bg-tech-blue` (Tech Blue)
@@ -44,10 +49,12 @@ This document provides essential context, commands, and guidelines for AI agents
 - **Color Space**: The project uses **OKLCH** for color definitions in `global.css`.
 
 ### 4. Imports
+
 - Use standard ES Modules (`import/export`).
 - Relative imports are standard (e.g., `import X from "../components/X.astro"`).
 
 ### 5. Data Management
+
 - Centralize static data (like map coordinates) in config files (e.g., `src/components/map/route-config.js`) rather than hardcoding in components.
 
 ## ⚠️ Guidelines for AI Agents
@@ -59,6 +66,14 @@ This document provides essential context, commands, and guidelines for AI agents
 - **Chinese Content**: This is a Chinese-language site. Ensure all user-facing text is in Chinese unless it's a technical label.
 
 ## 🗺 Interactive Map Updates
+
 - The route map is a core feature. Coordinates are handled via a custom grid system (0-100).
 - Data source: `src/components/map/route-config.js`.
 - Use the provided `useDevTools.js` logic (hidden in dev) to calibrate new coordinates if necessary.
+
+## 🔐 Environment Variables
+
+- **Runtime**: Cloudflare Workers exposes env vars via `Astro.locals.runtime.env`.
+- **Type Definitions**: `src/env.d.ts` defines the `Env` interface and extends `App.Locals`.
+- **Configuration**: Production env vars are set in `wrangler.jsonc` under `vars`.
+- **Local Dev**: Env vars like `CLARITY_ID` are `undefined` locally; do not mock them.
