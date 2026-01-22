@@ -19,7 +19,8 @@ const {
     description = "柴火创客空间流动实验室，走遍全国，将创新教育和技术资源带到乡村",
 } = Astro.props;
 
-const clarityId = Astro.locals?.runtime?.env?.CLARITY_ID;
+const clarityId = import.meta.env.PROD ? "v57hoszx30" : null;
+
 ---
 
 <!doctype html>

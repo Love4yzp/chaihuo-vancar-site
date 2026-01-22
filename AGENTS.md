@@ -8,8 +8,17 @@ This document provides essential context, commands, and guidelines for AI agents
 - **UI Libraries**: React 19 (for interactive components)
 - **Styling**: Tailwind CSS 4 + DaisyUI 5
 - **Runtime**: Node.js (ES Modules)
-- **Deployment**: Cloudflare Pages
+- **Deployment**: Cloudflare Pages (Worker-managed Static Site)
 - **Primary Language**: JavaScript (JS/JSX) with TypeScript support configured
+
+## 🏗 Deployment Architecture
+
+This project uses **Static Site Generation (SSG)** but is deployed via the **Cloudflare Workers Adapter** in advanced mode.
+
+- **Why**: This setup is "Future-Proof". It acts like a static site but allows for dynamic features (API routes, redirects, auth) via Workers if needed later.
+- **The `ASSETS` Binding**: In `wrangler.jsonc`, the `"binding": "ASSETS"` configuration is **CRITICAL**.
+  - Since a Worker intercepts all traffic, it uses this binding to fetch static files (images, CSS, JS) from Cloudflare's storage.
+  - **Do NOT remove** this binding, or static assets will fail to load.
 
 ## 🚀 Common Commands
 
@@ -70,10 +79,3 @@ This document provides essential context, commands, and guidelines for AI agents
 - The route map is a core feature. Coordinates are handled via a custom grid system (0-100).
 - Data source: `src/components/map/route-config.js`.
 - Use the provided `useDevTools.js` logic (hidden in dev) to calibrate new coordinates if necessary.
-
-## 🔐 Environment Variables
-
-- **Runtime**: Cloudflare Workers exposes env vars via `Astro.locals.runtime.env`.
-- **Type Definitions**: `src/env.d.ts` defines the `Env` interface and extends `App.Locals`.
-- **Configuration**: Production env vars are set in `wrangler.jsonc` under `vars`.
-- **Local Dev**: Env vars like `CLARITY_ID` are `undefined` locally; do not mock them.

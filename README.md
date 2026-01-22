@@ -234,10 +234,7 @@ A: 本项目可以部署到任何静态网站托管平台（如 Vercel, Netlify,
 
 ### Q: 如何配置 Microsoft Clarity 统计？
 
-A:
-
-- **生产环境 (Cloudflare)**：在 `wrangler.jsonc` 的 `vars` 中配置 `CLARITY_ID`。
-- **本地开发**：`CLARITY_ID` 默认为 `undefined`，Clarity 脚本不会被加载，以确保开发体验。
+A: Clarity ID 直接配置在 `src/layouts/MainLayout.astro` 中。**仅在生产环境构建时加载**（`import.meta.env.PROD` 为 true），本地开发环境不加载以保持清洁。
 
 ## 👥 贡献指南
 

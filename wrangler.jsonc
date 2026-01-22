@@ -7,13 +7,12 @@
     "global_fetch_strictly_public"
   ],
   "assets": {
+    // 关键配置：让 Worker 有权限通过 ASSETS.fetch() 读取静态文件
+    // CRITICAL: Allows Worker to fetch static files via ASSETS binding
     "binding": "ASSETS",
     "directory": "./dist"
   },
   "observability": {
     "enabled": true
-  },
-  "vars": {
-    "CLARITY_ID": "v57hoszx30"
   }
 }
