@@ -1,11 +1,11 @@
-# 柴火基地车 | Chaihuo VanCar
+# 柴火基地车 | Chaihuo MCV
 
 [![Open Source Hardware](https://img.shields.io/badge/Open%20Source-Hardware-blue)](https://www.oshwa.org/)
 [![License](https://img.shields.io/badge/License-CERN--OHL--S--2.0-green)](LICENSE)
 
 **让创新的星火，照亮每一片土地**
 
-柴火基地车是一个开源的移动创客空间项目。我们将一辆厢式货车改造成配备 3D 打印机、激光切割机等设备的移动实验室，巡游全国，为偏远地区带去 STEM 教育资源。
+柴火基地车是一个开源的移动创客空间项目。我们将一辆厢式货车改造成配备 3D 打印机、激光切割机等设备的移动 AI 实验室，巡游全国，为偏远地区带去 STEM 教育资源的同时，和大家一起发现和解决问题，共创解决方案。
 
 ## 项目结构
 
@@ -31,13 +31,13 @@ chaihuo-vancar/
 | 内容 | 链接 |
 |------|------|
 | 项目官网 | [website/](./website/) |
-| 详细文档 | [语雀文档](https://yuque.com/chaihuo-vancar) |
-| 物料清单 | [fabrication/bom/](./fabrication/bom/) |
-| 3D 打印文件 | [fabrication/3d-print/](./fabrication/3d-print/) |
+| 详细文档 | [语雀文档](https://www.yuque.com/chaihuo-mcv/home) |
+| 物料清单(coming soon) | [fabrication/bom/](./fabrication/bom/) |
+| 3D 打印文件(coming soon) | [fabrication/3d-print/](./fabrication/3d-print/) |
 
 ## 开始使用
 
-### 查看网站
+### 本地预览落地页网站
 
 ```bash
 cd website
@@ -45,7 +45,7 @@ npm install
 npm run dev
 ```
 
-访问 http://localhost:4321
+访问 `http://localhost:4321`
 
 ### 下载设计文件
 
