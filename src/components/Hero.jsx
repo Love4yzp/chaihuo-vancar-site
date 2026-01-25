@@ -16,8 +16,8 @@ export default function Hero() {
                     <div className="order-2 lg:order-1 relative z-10">
                         {/* 项目名称 + 多色大标题 */}
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
-                            <span className="text-base-content">柴火</span>
-                            <span className="text-chaihuo">基地车</span>
+                            <span className="text-base-content font-tech text-6xl">柴火</span>
+                            <span className="text-chaihuo font-tech">基地车</span>
                             <br />
                             <span className="text-tech-blue text-4xl md:text-5xl">移动 AI 实验室</span>
                         </h1>

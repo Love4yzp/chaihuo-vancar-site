@@ -1,18 +1,14 @@
 # cloudflare wrangler
 .wrangler/
-website/.wrangler/
 
 # build output
 dist/
-website/dist/
 
 # generated types
 .astro/
-website/.astro/
 
 # dependencies
 node_modules/
-website/node_modules/
 
 # logs
 npm-debug.log*

@@ -1,24 +1,15 @@
-# AGENTS.md - Agentic Workflow Guide for Chaihuo VanCar
+# AGENTS.md - Agentic Workflow Guide for Chaihuo MCV Website
 
-This document provides essential context, commands, and guidelines for AI agents working on the `chaihuo-vancar` monorepo.
+This document provides essential context, commands, and guidelines for AI agents working on the `chaihuo-mcv-site` repository.
 
-## 📁 Monorepo Structure
+## 📁 Repository Structure
 
 ```
-chaihuo-vancar/
-├── website/          # 宣传网站 (Astro + Cloudflare)
-├── design/           # 设计源文件（可编辑）
-│   ├── mechanical/   # 机械 CAD (STEP, 原生格式)
-│   └── electrical/   # 电气原理图 (KiCad 等)
-├── fabrication/      # 制造文件（给机器/供应商）
-│   ├── 3d-print/     # STL/3MF 打印文件
-│   ├── pcb/          # Gerber, 贴片文件
-│   ├── cut/          # DXF 激光/CNC 切割
-│   ├── bom/          # 物料清单 (CSV/Excel)
-│   └── wiring/       # 接线图 (PDF)
-└── operation/        # 运行代码
-    ├── firmware/     # 嵌入式代码 (MCU)
-    └── software/     # 服务器、IoT、控制软件
+chaihuo-mcv/
+├── src/              # Astro source files
+├── public/           # Static assets
+├── dist/             # Build output
+└── wrangler.jsonc    # Cloudflare Workers config
 ```
 
 ## 🛠 Website Environment
@@ -35,7 +26,7 @@ chaihuo-vancar/
 The website uses **Static Site Generation (SSG)** but is deployed via the **Cloudflare Workers Adapter** in advanced mode.
 
 - **Why**: This setup is "Future-Proof". It acts like a static site but allows for dynamic features (API routes, redirects, auth) via Workers if needed later.
-- **The `ASSETS` Binding**: In `website/wrangler.jsonc`, the `"binding": "ASSETS"` configuration is **CRITICAL**.
+- **The `ASSETS` Binding**: In `wrangler.jsonc`, the `"binding": "ASSETS"` configuration is **CRITICAL**.
   - Since a Worker intercepts all traffic, it uses this binding to fetch static files (images, CSS, JS) from Cloudflare's storage.
   - **Do NOT remove** this binding, or static assets will fail to load.
 
@@ -87,14 +78,6 @@ npm run preview  # Preview production build
 ### 5. Data Management
 
 - Centralize static data (like map coordinates) in config files (e.g., `src/components/map/route-config.js`) rather than hardcoding in components.
-
-## ⚠️ Guidelines for AI Agents
-
-- **Visual Changes**: Always delegate visual styling, layout, and animation tasks to the `frontend-ui-ux-engineer` agent.
-- **Logic Changes**: Logic, data flow, and Astro component structure can be handled directly.
-- **Verification**: Since no test suite exists, you MUST manually verify changes by reading the code and ensuring `lsp_diagnostics` are clean.
-- **TypeScript**: While `tsconfig.json` exists, the project is currently JS-heavy. Do not force-convert files to TS unless requested, but follow TS-like discipline in JS.
-- **Chinese Content**: This is a Chinese-language site. Ensure all user-facing text is in Chinese unless it's a technical label.
 
 ## 🗺 Interactive Map Updates
 
