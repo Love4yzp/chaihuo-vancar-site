@@ -4,7 +4,7 @@ This document provides essential context, commands, and guidelines for AI agents
 
 ## 📁 Repository Structure
 
-```
+```text
 chaihuo-mcv/
 ├── src/              # Astro source files
 ├── public/           # Static assets
@@ -92,3 +92,65 @@ npm run preview  # Preview production build
 - **Verification**: Since no test suite exists, you MUST manually verify changes by reading the code and ensuring `lsp_diagnostics` are clean.
 - **TypeScript**: While `tsconfig.json` exists, the project is currently JS-heavy. Do not force-convert files to TS unless requested, but follow TS-like discipline in JS.
 - **Chinese Content**: This is a Chinese-language site. Ensure all user-facing text is in Chinese unless it's a technical label.
+
+## ✏️ Volunteer & Developer Guide （志愿者/开发者指南）
+
+### 1️⃣ Modifying Text Content (`src/content`)
+
+#### Hero Title & Subtitle
+
+- File: `src/components/Hero.jsx`
+- Look for `<h1>` block. Edit the Chinese text directly.
+
+#### Project Intro Cards
+
+- File: `src/components/ProjectIntro.astro`
+- Edit `<h3>` (title) and `<p>` (description) tags.
+
+#### Statistics
+
+- File: `src/components/ProjectIntro.astro`
+- Look for `<div class="stat-value">`.
+
+### 2️⃣ Assets & Images
+
+#### Replacing Hero Background
+
+1. Place image in `public/`.
+2. Update `src/components/Hero.jsx`: `backgroundImage: 'url(/your-image.jpg)'`.
+
+### 3️⃣ Color Theme Configuration
+
+- File: `src/styles/global.css`
+- Core variables: `--color-chaihuo`, `--color-earth`, `--color-tech-blue`.
+- Uses **OKLCH** color space (Lightness, Chroma, Hue).
+
+### 4️⃣ Route Map Updates
+
+- File: `src/components/map/route-config.js`
+- **Key Cities**: Add to `KEY_CITIES` array (includes popup info).
+- **Route Path**: Add to `ROUTE_POINTS` array.
+- **Tip**: Use the built-in "Drawing Tool" in Dev mode (`IS_DEV = true` in `useDevTools.js`) to generate coordinate JSON.
+
+### 5️⃣ Adding Impact Stories
+
+- File: `src/pages/index.astro` (Impact Section) OR `src/content/stories/*.md` (if using collections).
+- Copy existing card structure in `index.astro`.
+
+## 📝 FAQ (Developer)
+
+### Q: Changes not showing?
+
+A: Ensure dev server is running (`npm run dev`) and refresh.
+
+### Q: Debugging errors?
+
+A: Check terminal output for Astro error messages.
+
+### Q: Deployment targets?
+
+A: Designed for Cloudflare Pages, but `npm run build` produces standard static files in `dist/` compatible with any host (Vercel, Netlify, Nginx).
+
+### Q: Microsoft Clarity?
+
+A: Configured in `src/layouts/MainLayout.astro`. Only loads in PROD (`import.meta.env.PROD`).

@@ -77,7 +77,7 @@ export default function Hero() {
                                 className="w-full h-auto object-cover"
                             />
                             {/* 图片上的渐变遮罩 */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                            <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
 
                         {/* 错落有致的浮动能力卡片 - 3个卡片形成动态层次布局 */}
@@ -88,7 +88,7 @@ export default function Hero() {
                             style={{ transform: 'rotate(3deg)' }}
                         >
                             <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-chaihuo/20 to-chaihuo/5 flex items-center justify-center shadow-inner">
+                                <div className="w-12 h-12 rounded-xl bg-linear-to-br from-chaihuo/20 to-chaihuo/5 flex items-center justify-center shadow-inner">
                                     <span className="text-2xl">🧠</span>
                                 </div>
                                 <div>
@@ -104,7 +104,7 @@ export default function Hero() {
                             style={{ transform: 'translateY(-50%) rotate(-2deg)' }}
                         >
                             <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-tech-blue/20 to-tech-blue/5 flex items-center justify-center shadow-inner">
+                                <div className="w-12 h-12 rounded-xl bg-linear-to-br from-tech-blue/20 to-tech-blue/5 flex items-center justify-center shadow-inner">
                                     <span className="text-2xl">🔓</span>
                                 </div>
                                 <div>
