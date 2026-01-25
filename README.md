@@ -1,46 +1,31 @@
-# 柴火创客空间 - 基地车 MCV
+# 柴火创客空间 - 基地车 ｜ Chaihuo MCV
 
 [![Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?logo=astro)](https://astro.build)
-[![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react)](https://react.dev)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-5.x-5A0EF8?logo=daisyui)](https://daisyui.com)
 
-我们将一辆厢式货车改造成配备 3D 打印机、激光切割机等设备的移动 AI 实验室。
+柴火基地车是一个开源的移动创客空间项目。我们将一辆厢式货车改造成配备 3D 打印机、激光切割机等设备的移动 AI 实验室，巡游全国，为偏远地区带去 STEM 教育资源的同时，和大家一起发现和解决问题，共创解决方案。
 
-## 📂 项目结构
+**硬件设备**: [chaihuo-mcv-gears](https://github.com/Chaihuo-Makerspace/chaihuo-mcv-gears) 。
 
-```text
-chaihuo-vancar-site/
-├── src/            # 源代码 (Astro, React, CSS)
-├── public/         # 静态资源
-└── dist/           # 构建产物
+## 本地预览
+
+```bash
+npm install
+npm run dev
 ```
 
-## ️ 技术栈
+访问 `http://localhost:4321`
 
-- **Astro 5.x** - 现代化静态网站生成器
-- **React 19** - 交互式组件
-- **Tailwind CSS 4** - 实用优先的 CSS 框架
-- **DaisyUI 5** - Tailwind 组件库
-- **Cloudflare Workers** - 边缘部署
+## 参与
 
-## � 参与贡献
+- **网站代码贡献**: 欢迎提交 PR 改进网站交互或视觉体验。
+- **内容修改**: 请参考 `AGENTS.md` 中的指南。
 
-我们欢迎所有志愿者参与！
+## 许可证
 
-如果你是**开发者**或需要修改网站内容，请查看仓库中的 `AGENTS.md` 文件，其中包含了详细的：
-
-- 开发环境搭建指南
-- 内容修改教程（已有详细的志愿者指南）
-- 部署说明
-
-## 📞 联系我们
-
-如果遇到技术问题或希望加入我们：
-
-- Email: <tech@chaihuo.org>
-- 微信公众号：柴火创客空间
+此网站代码遵循 [MIT License](LICENSE)。
+文字内容与媒体素材遵循 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)。
 
 ---
 
-Made with ❤️ by Chaihuo Makerspace
+Made with ❤️ by [Chaihuo Makerspace](https://chaihuo.org)
