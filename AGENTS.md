@@ -35,12 +35,32 @@ The website uses **Static Site Generation (SSG)** but is deployed via the **Clou
 ### Website Development & Build
 
 ```bash
-cd website
 npm install
 npm run dev      # Start Astro dev server (localhost:4321)
 npm run build    # Build to website/dist/
 npm run preview  # Preview production build
 ```
+
+### Deployment Commands
+
+The site supports two deployment targets:
+
+**Cloudflare Pages (default)**:
+
+    npm run build        # Default Cloudflare build
+    npm run build:cf     # Explicit Cloudflare build
+
+**Node.js Server**:
+
+    npm run build:node              # Build for Node.js (必须先执行)
+    PORT=3000 npm run start         # Start Node.js server on port 3000
+
+Note: `start` 命令需要显式指定 `PORT`，否则使用默认端口 4321。
+
+**Docker**:
+
+    docker build -t chaihuo-mcv .
+    docker run -p 3000:3000 chaihuo-mcv  # 容器内已设置 PORT=3000
 
 ### Testing & Linting
 
@@ -149,7 +169,17 @@ A: Check terminal output for Astro error messages.
 
 ### Q: Deployment targets?
 
-A: Designed for Cloudflare Pages, but `npm run build` produces standard static files in `dist/` compatible with any host (Vercel, Netlify, Nginx).
+A: The site supports two deployment targets:
+1. **Cloudflare Pages** (default): Use `npm run build` or `npm run build:cf`
+2. **Node.js Server**: Use `npm run build:node && PORT=3000 npm run start`
+3. **Docker**: Use `docker build -t chaihuo-mcv . && docker run -p 3000:3000 chaihuo-mcv`
+
+The build output in `dist/` varies by target:
+- Cloudflare: `dist/_worker.js/` (Worker script)
+- Node.js: `dist/server/entry.mjs` (standalone server)
+
+**Note**: The `npm run start` command requires `PORT` environment variable.
+Without it, the server uses the default port 4321.
 
 ### Q: Microsoft Clarity?
 
