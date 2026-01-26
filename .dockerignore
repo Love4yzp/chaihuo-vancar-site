@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.gitignore
+*.md
+.sisyphus
+.vscode
+.idea
