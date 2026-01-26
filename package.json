@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:cf": "BUILD_TARGET=cloudflare astro build",
+    "build:node": "BUILD_TARGET=node astro build",
+    "start": "node dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
