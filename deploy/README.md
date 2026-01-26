@@ -14,14 +14,21 @@ chmod +x deploy.sh
 ## Deploy
 
 ```bash
-cd /opt/chaihuo-mcv/deploy
-./deploy.sh
+cd /opt/chaihuo-mcv
+
+# 1. Pull latest code (你自己控制)
+git pull
+
+# 2. Deploy with Docker (脚本只负责这个)
+./deploy/deploy.sh
 ```
 
-The script will:
-1. `git pull` latest code
-2. `docker-compose up -d --build` (build & start)
+The deploy script will:
+
+1. Build Docker image from current code
+2. Start/restart container
 3. Verify container health
+4. Clean up old images
 
 ## Manual Commands
 
@@ -32,6 +39,7 @@ docker-compose up -d --build   # Build and start
 docker-compose logs -f         # View logs
 docker-compose down            # Stop
 docker-compose ps              # Status
+docker-compose restart         # Restart without rebuild
 ```
 
 ## Verify
