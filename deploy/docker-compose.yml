@@ -1,8 +1,9 @@
-version: '3.8'
-
 services:
   chaihuo-mcv-site:
-    image: ghcr.io/chaihuo-makerspace/chaihuo-mcv-site:latest
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: chaihuo-mcv-site:latest
     container_name: chaihuo-mcv-site
     ports:
       - "3000:3000"

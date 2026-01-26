@@ -9,7 +9,7 @@ chaihuo-mcv/
 ├── src/              # Astro source files
 ├── public/           # Static assets
 ├── dist/             # Build output
-└── wrangler.jsonc    # Cloudflare Workers config
+└── deploy/           # VPS deployment scripts
 ```
 
 ## 🛠 Website Environment
@@ -18,17 +18,16 @@ chaihuo-mcv/
 - **UI Libraries**: React 19 (for interactive components)
 - **Styling**: Tailwind CSS 4 + DaisyUI 5
 - **Runtime**: Node.js (ES Modules)
-- **Deployment**: Cloudflare Pages (Worker-managed Static Site)
+- **Deployment**: Docker container on VPS (via @astrojs/node adapter)
 - **Primary Language**: JavaScript (JS/JSX) with TypeScript support configured
 
 ## 🏗 Deployment Architecture
 
-The website uses **Static Site Generation (SSG)** but is deployed via the **Cloudflare Workers Adapter** in advanced mode.
+The website uses **Static Site Generation (SSG)** deployed via the **@astrojs/node adapter** in standalone mode.
 
-- **Why**: This setup is "Future-Proof". It acts like a static site but allows for dynamic features (API routes, redirects, auth) via Workers if needed later.
-- **The `ASSETS` Binding**: In `wrangler.jsonc`, the `"binding": "ASSETS"` configuration is **CRITICAL**.
-  - Since a Worker intercepts all traffic, it uses this binding to fetch static files (images, CSS, JS) from Cloudflare's storage.
-  - **Do NOT remove** this binding, or static assets will fail to load.
+- **Build Output**: `dist/server/entry.mjs` - A standalone Node.js server
+- **Static Assets**: Served from `dist/client/`
+- **Deployment**: VPS local build via `deploy/deploy.sh`
 
 ## 🚀 Common Commands
 
@@ -43,19 +42,10 @@ npm run preview  # Preview production build
 
 ### Deployment Commands
 
-The site supports two deployment targets:
+**Build & Run**:
 
-**Cloudflare Pages (default)**:
-
-    npm run build        # Default Cloudflare build
-    npm run build:cf     # Explicit Cloudflare build
-
-**Node.js Server**:
-
-    npm run build:node              # Build for Node.js (必须先执行)
+    npm run build                   # Build for Node.js
     PORT=3000 npm run start         # Start Node.js server on port 3000
-
-Note: `start` 命令需要显式指定 `PORT`，否则使用默认端口 4321。
 
 **Docker**:
 
@@ -170,12 +160,10 @@ A: Check terminal output for Astro error messages.
 ### Q: Deployment targets?
 
 A: The site supports two deployment targets:
-1. **Cloudflare Pages** (default): Use `npm run build` or `npm run build:cf`
-2. **Node.js Server**: Use `npm run build:node && PORT=3000 npm run start`
-3. **Docker**: Use `docker build -t chaihuo-mcv . && docker run -p 3000:3000 chaihuo-mcv`
+1. **Node.js Server**: Use `npm run build && PORT=3000 npm run start`
+2. **Docker**: Use `docker build -t chaihuo-mcv . && docker run -p 3000:3000 chaihuo-mcv`
 
 The build output in `dist/` varies by target:
-- Cloudflare: `dist/_worker.js/` (Worker script)
 - Node.js: `dist/server/entry.mjs` (standalone server)
 
 **Note**: The `npm run start` command requires `PORT` environment variable.
