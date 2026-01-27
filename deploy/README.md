@@ -35,11 +35,11 @@ The deploy script will:
 ```bash
 cd /opt/chaihuo-mcv/deploy
 
-docker-compose up -d --build   # Build and start
-docker-compose logs -f         # View logs
-docker-compose down            # Stop
-docker-compose ps              # Status
-docker-compose restart         # Restart without rebuild
+docker compose up -d --build   # Build and start
+docker compose logs -f         # View logs
+docker compose down            # Stop
+docker compose ps              # Status
+docker compose restart         # Restart without rebuild
 ```
 
 ## Verify
